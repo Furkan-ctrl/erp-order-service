@@ -1,3 +1,36 @@
+server:
+  port: ${ORDER_PORT:8083}
+
 spring:
   application:
     name: order-service
+
+  datasource:
+    url: ${ORDER_DB_URL:jdbc:postgresql://localhost:5434/order_db}
+    username: ${ORDER_DB_USER:order_user}
+    password: ${ORDER_DB_PASS:order_pass}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+inventory:
+  service-url: ${INVENTORY_SERVICE_URL:http://localhost:8082}
+
+
+file:
+  upload-dir: ${FILE_UPLOAD_DIR:./data/uploads}
+
+
+notification:
+  thread-pool-size: 5
+  fixed-rate-ms: 30000
+
+logging:
+  level:
+    com.erp.order: DEBUG
